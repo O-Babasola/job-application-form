@@ -1,11 +1,16 @@
-/*Actual CSS code*/
+/* enables smooth scrolling for anchor links */
+body{
+  scroll-behavior: smooth;
+  font-family: Times New Roman;
+}
+
 .container{
   width: 300px;
   padding: 20px;
-  background-color: white;
-  margin: 40px auto; /* center horizontally */
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+background-color: white;
+margin: 40px auto; /* center horizontally */
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
 }
 
 
@@ -14,37 +19,39 @@ input:first-of-type {
   border-radius: 10px;
 }
 
-/* Changes the form to red when input is invalid */
-input[type="text"]:invalid,
-input[type="email"]:invalid,
-select:invalid {
+input:focus, textarea:focus{
+  border-color: green;
+  outline: none;
+}
+
+/*To make it correct invalid must come before valid */
+input:invalid, select:invalid, textarea:invalid{
   border-color: red;
 }
 
-/* Changes the form to green when input is valid */
-input[type="text"]:valid,
-input[type="email"]:valid,
-select:valid {
+input:valid, select:valid, textarea:valid{
   border-color: green;
 }
 
+/* CSS-only validation styling for inputs */
+        input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
+        input[type="email"]:invalid:not(:focus):not(:placeholder-shown) {
+          border-color: #ff6b6b;
+          background-color: rgba(255, 107, 107, 0.05);
+        }
 
-/* Changes the form to blue when input is focused, focus overrides previous states so it be must after the valid/invalid states*/
-input[type="text"]:focus,
-input[type="email"]:focus,
-select:focus {
-  border-color: red;
-  outline: none;
-  box-shadow: 0 0 5px red;  /* optional: makes focus more visible */
-} 
+input[type="text"]:valid:not(:focus):not(:placeholder-shown),
+        input[type="email"]:valid:not(:focus):not(:placeholder-shown) {
+          border-color: #51cf66;
+          background-color: rgba(81, 207, 102, 0.05);
+        }
 
 
-textarea:focus{
-  border-color: green;
-  outline: none;
-  color: blue;
+/* CSS-only validations styling for label, select element validation - only green when an option is selected */
+ select:valid{
+  border-color: #51cf66 !important; /* need to add "!important" due to CSS specificity or conflicting rules */
+  background-color: white; /* Keep white background */
 }
-
 
 
 /* Makes the form input, label, select, button to be each on a new line */
@@ -62,22 +69,6 @@ label[for="message"]{
   font-weight: bold;
 }
 
-label, input, select, textarea{
-  font-family: Times New Roman;
-}
-
-
-button{
-  background: green;
-  color: white;
-}
-
-button:hover{
-background-color: black;
-color: white;
-cursor: pointer;
-}
-
 
 /* For better spacing, added margin to inputs and textareas */
 input, select, textarea {
@@ -86,13 +77,7 @@ input, select, textarea {
   transition: border-color 0.2s ease; /* Optional: Smooth transition for border color change */
 }
 
-
-
-textarea{
-  border-radius: 10px;
-}
-
-/* Style Full Name and Email inputs and position dropdown with pink border */
+/* Style Full Name and Email inputs and position dropdown with blue border */
 input[type="text"], /* Full Name */
 input[type="email"],
 #position{ 
@@ -104,14 +89,12 @@ input[type="email"],
 }
 
 
-
 /* Make radio buttons and labels side by side */
 .radio-group {
   display: flex;
   gap: 10px; /* Space between options */
   align-items: center; /* Vertically align label and radio button */
 }
-
 
 
 /* Hide the default radio button */
@@ -128,6 +111,7 @@ input[type="email"],
   margin-right: 10px;
 }
 
+
 /* Outer border turns green when checked, inside stays white */
 .radio-group input[type="radio"]:checked {
   border-color: green;
@@ -141,8 +125,8 @@ input[type="email"],
   position: absolute;
   top: 50%;  /* Centers the inner circle */
   left: 50%;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background-color: green; /* Inner filled circle */
   border-radius: 50%;
   transform: translate(-50%, -50%); /* Centers the dot*/
@@ -150,7 +134,7 @@ input[type="email"],
 
 /* Change label color when its radio button is selected because ":checked" pseudo-class only works on input elements and not apply directly to the "<label>"*/
 .radio-group input[type="radio"]:checked + label {
-  color: green; /* Change this to any color you like */
+  color: green; /* Change this color of the name next to the circles */
   display: inline-block;
 }
 
@@ -159,42 +143,17 @@ textarea{
   padding-top: 10px;  /* moves text down from the top */
   padding-left: 8px; /* optional: adds space from the left */
   border-radius: 10px;
+  border-color: skyblue;
 }
-
-
-
-
-
-
-
-/*
-/*Changes the form to blue when input is in focus*/
-input:focus, textarea:focus, select:focus{
-  border-color: blue;
-}
-
-/*Changes the form to green when input is valid*/
-input:valid, 
-textarea:valid, select:valid{
-  border-color: green;
-}
-
-/*Changes the form to red when input is invalid*/
-input:invalid, textarea:invalid, select:invalid {
-  border-color: red;
-}
-
-
-/* Add transition effects for smoother interaction */
-input, textarea, select, button {
-  transition: all 0.2s ease;
-}
-
 
 
 button{
   background: green;
   color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
 button:hover{
@@ -203,75 +162,4 @@ color: white;
 cursor: pointer;
 }
 
-
-/* For better spacing, added margin to inputs and textareas */
-input, select, textarea {
-  margin-bottom: 10px;
-  
-}
-
-
-/* Style Full Name and Email inputs with blue border */
-input[type="text"], /* Full Name */
-input[type="email"] { /* Email */
-  border: 2px solid pink;
-  border-radius: 10px; /* Optional: round corners */
-  padding: 5px;
-}
-
-/* Make radio buttons and labels side by side */
-.radio-group {
-  display: flex;
-  gap: 10px; /* Space between options */
-  align-items: center; /* Vertically align label and radio button */
-}
-
-
-
-
-/* Hide the default radio button */
-.radio-group input[type="radio"] {
-  appearance: none;  /* Removes native style */ /* lets you style the selected option without JavaScript.*/
-  
-  width: 20px;
-  height: 20px;
-  border: 2px solid gray;
-  border-radius: 50%; /* Circular */
-  background-color: white; /* keeps inside white*/
-  cursor: pointer;
-  position: relative;
-  margin-right: 10px;
-}
-
-/* Outer border turns green when checked, inside stays white */
-.radio-group input[type="radio"]:checked {
-  border-color: green;
-  background-color: white;
-  box-shadow: 0 0 5px 2px #98FB98; /* green glow*/
-}
-
-/* Inner green circle */
-.radio-group input[type="radio"]:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;  /* Centers the inner circle */
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  background-color: green; /* Inner filled circle */
-  border-radius: 50%;
-  transform: translate(-50%, -50%); /* Centers the dot*/
-}
-
-/* Change label color when its radio button is selected because ":checked" pseudo-class only works on input elements and not apply directly to the "<label>"*/
-.radio-group input[type="radio"]:checked + label {
-  color: green; /* Change this to any color you like */
-}
-
-
-/* Style the first input field differently */
-input:first-of-type {
-  border-radius: 10px;
-} 
-*/
 
